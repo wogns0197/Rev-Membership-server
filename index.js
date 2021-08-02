@@ -36,8 +36,10 @@ app.post('/api/updateData', (req, res) => {
   console.log(req.body);
   ClientData.updateOne({ phonenumber: req.body.phonenumber }
     , {
-      $set: { point: req.body.point },
-      $set: { buycount: req.body.buycount},
+      $set: {
+        point: req.body.point,
+        buycount: req.body.buycount
+      },
       $push: {pointhistory: req.body.pointhistory}
       // buycount: req.body.buycount,
     }, (err) => {
