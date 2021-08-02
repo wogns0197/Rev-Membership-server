@@ -58,6 +58,21 @@ app.post('/api/getData', (req, res) => {
     .catch(err => console.log(err));
 });
 
+app.post('/api/getDatebyName', (req, res) => {
+  ClientData.findOne({ "name": req.body.name })
+    .then(data => {      
+      return res.json(data);
+    })
+    .catch(err => console.log(err));
+});
+
+//get All CLients Data
+app.post('/api/getAllData', (req, res) => {
+  ClientData.find({})
+    .then(data => { return res.json(data); })
+    .catch(err => console.log(err));
+});
+
 // kill server port
 // netstat -tnlp
 // sudo fuser -k -n tcp 5000
