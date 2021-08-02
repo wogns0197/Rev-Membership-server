@@ -4,8 +4,13 @@ const dataSchema = mongoose.Schema({
   key: String,
   name: String,
   phonenumber: String,
-  point: Number,
+  point: Number,  
+  pointhistory: [{
+    date: String,
+    point: Number,    
+  }],
   buycount: Number,
+  registertime: String,
 });
 
 

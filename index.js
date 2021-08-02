@@ -21,8 +21,8 @@ app.use(cors());
 
 // register Client Data
 app.post('/api/registerData', (req, res) => {
-  const data = ClientData(req.body);
-  console.log(req.body); // test
+  const data = ClientData(req.body);  
+  console.log(data); // test
   data.save((err) => {
     if (err) return res.json({ message: err.message });
   });
@@ -36,7 +36,9 @@ app.post('/api/updateData', (req, res) => {
   console.log(req.body);
   ClientData.updateOne({ phonenumber: req.body.phonenumber }
     , {
-      point: req.body.point,
+      $set: { point: req.body.point },
+      $set: { buycount: req.body.buycount},
+      $push: {pointhistory: req.body.pointhistory}
       // buycount: req.body.buycount,
     }, (err) => {
       if (err) return res.json({ message: err.message });
@@ -48,10 +50,14 @@ app.post('/api/updateData', (req, res) => {
 
 //get Client Data
 app.post('/api/getData', (req, res) => {
-  ClientData.find({ "phonenumber": req.body.phonenumber })
+  ClientData.findOne({ "phonenumber": req.body.phonenumber })
     .then(data => {
       console.log(res.json(data)); // test
       return res.json(data);
     })
     .catch(err => console.log(err));
 });
+
+// kill server port
+// netstat -tnlp
+// sudo fuser -k -n tcp 5000
