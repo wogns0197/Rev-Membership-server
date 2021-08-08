@@ -75,7 +75,7 @@ app.post('/api/getAllData', (req, res) => {
     .catch(err => console.log(err));
 });
 
-app.post('./api/removeData', (req, res) => {
+app.post('/api/removeData', (req, res) => {
   ClientData.deleteOne({
     name: req.body.name,
     phonenumber: req.body.phonenumber,
