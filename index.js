@@ -75,6 +75,16 @@ app.post('/api/getAllData', (req, res) => {
     .catch(err => console.log(err));
 });
 
+app.post('./api/removeData', (req, res) => {
+  ClientData.deleteOne({
+    name: req.body.name,
+    phonenumber: req.body.phonenumber,
+  }, (err) => {
+    if (err) return res.json({ message: err.message });
+  });
+  return res.status(200);
+});
+
 // kill server port
 // netstat -tnlp
 // sudo fuser -k -n tcp 5000
